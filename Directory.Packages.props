@@ -6,7 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Ical.Net" Version="5.2.3" />
-    <PackageVersion Include="JoinRpg.Common.WebInfrastructure" Version="2026.7.10" />
+    <PackageVersion Include="JoinRpg.Common.WebInfrastructure" Version="2026.7.14" />
     <PackageVersion Include="LinqKit.Microsoft.EntityFrameworkCore" Version="10.0.11" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.QuickGrid" Version="10.0.11" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
@@ -22,7 +22,7 @@
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
-    <PackageVersion Include="JoinRpg.Common.KogdaIgraClient" Version="2026.7.10" />
+    <PackageVersion Include="JoinRpg.Common.KogdaIgraClient" Version="2026.7.14" />
     <PackageVersion Include="OpenIddict.Client.AspNetCore" Version="7.6.0" />
     <PackageVersion Include="OpenIddict.Client.SystemNetHttp" Version="7.6.0" />
     <PackageVersion Include="OpenIddict.EntityFrameworkCore" Version="7.6.0" />
