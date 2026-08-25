@@ -1,9 +1,9 @@
 @using Bastilia.Rating.Domain
 @if (Project.HasProblems)
 {
-    <Tooltip Title="@TooltipText">
-        <WarningIcon />
-    </Tooltip>
+    <span class="text-warning">
+        <JoinIcon Icon="JoinIconType.Warning" Title="@TooltipText" />
+    </span>
 }
 @code {
     [Parameter, EditorRequired]

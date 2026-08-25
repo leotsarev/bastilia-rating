@@ -6,7 +6,7 @@
     {
             <div class="mb-4">
                 <h5 class="d-flex align-items-center">
-                    <i class="bi bi-kanban me-2"></i>Администрирует проекты
+                    <JoinIcon Icon="JoinIconType.Project" /> Администрирует проекты
                 </h5>
         <div class="list-group">
             @foreach (var project in Member.HisActiveProjects.OrderByDescending(p => p.AddDate))
@@ -29,7 +29,7 @@
     *@
 <div>
     <h5 class="d-flex align-items-center">
-        <i class="bi bi-trophy me-2"></i>Достижения
+        <JoinIcon Icon="JoinIconType.Achievement" /> Достижения
     </h5>
 
     @if (Member.Achievements.Any() == true)

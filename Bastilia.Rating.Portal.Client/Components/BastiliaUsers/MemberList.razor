@@ -10,7 +10,7 @@
         @if (member.IsPresident)
         {
             <span class="badge bg-warning text-dark">
-                <i class="bi bi-award me-1"></i>Комендант до @member.PresidentUntil!.Value.ToString(CultureInfo.GetCultureInfo("ru-RU"))
+                <JoinIcon Icon="JoinIconType.Award" /> Комендант до @member.PresidentUntil!.Value.ToString(CultureInfo.GetCultureInfo("ru-RU"))
             </span>
         }
         else
