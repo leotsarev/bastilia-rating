@@ -1,4 +1,5 @@
 ﻿using Bastilia.Rating.Database.Entities;
+using JoinRpg.Common.EntityFrameworkCore;
 using AchievementTemplate = Bastilia.Rating.Database.Entities.AchievementTemplate;
 using BastiliaProject = Bastilia.Rating.Database.Entities.BastiliaProject;
 
@@ -47,6 +48,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 .OnDelete(DeleteBehavior.Restrict);
         });
 
+        // Конвертация typed-id свойств (реализующих IEntityId<TSelf,TValue>) зарегистрирована в
+        // ConfigureConventions — но идентифицировать однопроцессные PK как identity-колонки нужно уже здесь,
+        // когда модель построена. Покрывает и UserIdentification (User.JoinRpgUserId).
+        modelBuilder.EntityIdsSetValueGeneratedOnAdd();
+
         // Configure enum conversions
         modelBuilder.Entity<BastiliaProject>()
             .Property(p => p.ProjectType)
@@ -93,5 +99,19 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         configurationBuilder.Properties<BastiliaStatusType>()
             .HaveConversion<string>();
+
+        // По одной строке на каждый typed-id (HaveEntityIdValueConversion<TId, TValue> — общий generic-конвертер
+        // из JoinRpg.Common.EntityFrameworkCore). Регистрация обязана происходить именно тут, в ConfigureConventions
+        // (до построения модели) — иначе EF ещё не знает, что это скалярный тип, и на этапе обнаружения
+        // сущностей ошибочно принимает такое свойство за навигацию к новой entity. TValue не выводится
+        // из TId, поэтому указывается явно.
+        configurationBuilder.Properties<BastiliaProjectId>()
+            .HaveEntityIdValueConversion<BastiliaProjectId, int>();
+
+        configurationBuilder.Properties<TemplateId>()
+            .HaveEntityIdValueConversion<TemplateId, int>();
+
+        configurationBuilder.Properties<UserIdentification>()
+            .HaveEntityIdValueConversion<UserIdentification, int>();
     }
 }

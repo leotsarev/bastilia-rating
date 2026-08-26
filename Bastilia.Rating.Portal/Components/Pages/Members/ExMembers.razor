@@ -49,7 +49,7 @@ else
 
     private record class PseudoLink(string UserName) : IUserLink
     {
-        public int JoinrpgUserId => -1;
+        public UserIdentification JoinrpgUserId => new(-1);
 
         public string? Slug => null;
     }

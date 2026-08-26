@@ -2,7 +2,7 @@
 {
     internal class UserDbService(IDbContextFactory<AppDbContext> contextFactory) : IUserDbService
     {
-        public async Task<BastiliaMember> AddUser(int playerId, string nickName, string avatarUrl)
+        public async Task<BastiliaMember> AddUser(UserIdentification playerId, string nickName, string avatarUrl)
         {
             var user = new Entities.User()
             {

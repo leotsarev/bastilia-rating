@@ -2,7 +2,7 @@ namespace Bastilia.Rating.Domain
 {
     public record class BastiliaProjectWithDetails : BastiliaProject
     {
-        public BastiliaProjectWithDetails(int BastiliaProjectId, string ProjectName, ProjectType ProjectType,
+        public BastiliaProjectWithDetails(BastiliaProjectId BastiliaProjectId, string ProjectName, ProjectType ProjectType,
                                           BrandType BrandType, bool OngoingProject, bool? ProjectOfTheYear,
                                           int? JoinrpgProjectId, int? KogdaIgraProjectId, string? ProjectUri,
                                           IReadOnlyCollection<IUserLink> Coordinators,

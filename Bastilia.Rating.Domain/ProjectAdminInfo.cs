@@ -1,7 +1,7 @@
 ﻿namespace Bastilia.Rating.Domain;
 
 public record ProjectAdminInfo(
-    int ProjectId,
+    BastiliaProjectId ProjectId,
     string ProjectName,
     DateOnly AddDate,
     DateOnly? RemoveDate)

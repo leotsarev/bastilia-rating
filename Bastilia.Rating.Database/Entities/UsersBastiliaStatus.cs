@@ -2,7 +2,7 @@ namespace Bastilia.Rating.Database.Entities;
 
 public class UsersBastiliaStatus
 {
-    public int JoinrpgUserId { get; set; }
+    public required UserIdentification JoinrpgUserId { get; set; }
     public DateOnly BeginDate { get; set; }
     public DateOnly? EndDate { get; set; }
     public BastiliaStatusType StatusType { get; set; }

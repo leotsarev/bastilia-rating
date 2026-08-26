@@ -8,4 +8,9 @@
     <ProjectReference Include="..\JoinRpg.Client\JoinRpg.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="JoinRpg.Common.PrimitiveTypes" />
+    <PackageReference Include="JoinRpg.Common.PrimitiveTypes.SourceGenerator" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
 </Project>

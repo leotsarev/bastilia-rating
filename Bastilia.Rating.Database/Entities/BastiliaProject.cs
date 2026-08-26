@@ -2,7 +2,7 @@ namespace Bastilia.Rating.Database.Entities;
 
 public class BastiliaProject
 {
-    public int BastiliaProjectId { get; set; }
+    public BastiliaProjectId BastiliaProjectId { get; set; } = null!;
     public required string ProjectName { get; set; }
 
     public string ProjectDescription { get; set; } = "";

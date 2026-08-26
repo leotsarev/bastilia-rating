@@ -1,4 +1,3 @@
-@using Bastilia.Rating.Domain.Common
 @inject IProjectService projectService
 @inject UserLoaderHelper userLoaderHelper
 @inject NavigationManager navigationManager
@@ -19,7 +18,7 @@
 
 @code {
     [Parameter, EditorRequired]
-    public int ProjectId { get; set; }
+    public BastiliaProjectId ProjectId { get; set; } = null!;
 
     [Parameter, EditorRequired]
     public IReadOnlyCollection<IUserLink> Coordinators { get; set; } = [];
@@ -42,7 +41,7 @@
     private async Task Submit()
     {
         var users = await userLoaderHelper.LoadUsersWithCheck(Model!.Coordinators);
-        var coordinators = users.Select(u => new UserIdentification(u.JoinrpgUserId)).ToList();
+        var coordinators = users.Select(u => u.JoinrpgUserId).ToList();
 
         await projectService.UpdateCoordinators(ProjectId, coordinators);
         await OnCompleted.InvokeAsync();

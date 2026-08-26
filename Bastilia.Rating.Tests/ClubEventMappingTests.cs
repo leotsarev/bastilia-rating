@@ -13,8 +13,8 @@ public class ClubEventMappingTests
             EventType = BastiliaCalendarItemType.BirthdayParty,
             EventDate = TestDate,
             Length = 2,
-            JoinRpgUserId = 42,
-            User = new User { JoinRpgUserId = 42, Username = "Иванов", AvatarUrl = "" },
+            JoinRpgUserId = new UserIdentification(42),
+            User = new User { JoinRpgUserId = new UserIdentification(42), Username = "Иванов", AvatarUrl = "" },
         };
 
         var item = BastiliaMemberRepository.ToCalendarItem(clubEvent);
@@ -78,7 +78,7 @@ public class ClubEventMappingTests
             EventDate = TestDate,
             Length = 1,
             Title = "Сбор команды",
-            ProjectId = 55,
+            ProjectId = new BastiliaProjectId(55),
         };
 
         var item = BastiliaMemberRepository.ToCalendarItem(clubEvent);

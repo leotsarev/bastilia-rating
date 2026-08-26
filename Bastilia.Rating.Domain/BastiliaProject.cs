@@ -1,6 +1,14 @@
+using System.Text.Json.Serialization;
+
 namespace Bastilia.Rating.Domain;
 
-public record BastiliaProject(int BastiliaProjectId,
+[method: JsonConstructor]
+[TypedEntityId]
+public partial record class BastiliaProjectId(int Value)
+{
+}
+
+public record BastiliaProject(BastiliaProjectId BastiliaProjectId,
                               string ProjectName,
                               ProjectType ProjectType,
                               BrandType BrandType,

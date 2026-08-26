@@ -2,9 +2,9 @@ namespace Bastilia.Rating.Database.Entities;
 
 public class AchievementTemplate
 {
-    public int AchievementTemplateId { get; set; }
-    public int? ProjectId { get; set; }
-    public int? OwnerId { get; set; }
+    public TemplateId AchievementTemplateId { get; set; } = null!;
+    public BastiliaProjectId? ProjectId { get; set; }
+    public UserIdentification? OwnerId { get; set; }
     public required string AchievementName { get; set; }
     public required string AchievementDescription { get; set; }
     public required string AchievementImageUrl { get; set; }

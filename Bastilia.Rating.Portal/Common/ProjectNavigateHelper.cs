@@ -10,7 +10,7 @@ namespace Bastilia.Rating.Portal.Common
         public async Task<BastiliaProjectWithDetails?> LoadProjectWithCheck(string projectIdOrSlug)
         {
             BastiliaProjectWithDetails? project;
-            if (int.TryParse(projectIdOrSlug, out var projectId))
+            if (BastiliaProjectId.TryParse(projectIdOrSlug, null, out var projectId))
             {
                 project = await projectRepository.GetByIdAsync(projectId);
             }

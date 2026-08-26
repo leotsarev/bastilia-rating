@@ -4,7 +4,7 @@ namespace Bastilia.Rating.Database.Entities;
 public class User
 {
 
-    public int JoinRpgUserId { get; set; }
+    public required UserIdentification JoinRpgUserId { get; set; }
     public required string Username { get; set; }
     public required string AvatarUrl { get; set; }
     public bool ParticipateInRating { get; set; }

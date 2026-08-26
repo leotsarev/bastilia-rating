@@ -39,7 +39,7 @@
                         <InputSelect @bind-Value="AddModel!.TemplateId" class="form-select">
                             @foreach (var template in project.Templates)
                             {
-                                <option value="@template.TemplateId">@template.Name</option>
+                                <option value="@template.TemplateId.Value">@template.Name</option>
                             }
                         </InputSelect>
                     </label>
@@ -97,7 +97,7 @@ else if (project.EndDate is not null && project.Templates.Count == 0)
 
     private BastiliaProjectWithDetails? project;
     private bool addedSuccess = false;
-    private int currentUserId;
+    private UserIdentification currentUserId = null!;
     private int addFormResetKey;
 
     protected override async Task OnParametersSetAsync()
@@ -126,7 +126,7 @@ else if (project.EndDate is not null && project.Templates.Count == 0)
             var users = await userLoaderHelper.LoadUsersWithCheck(AddModel!.UserId);
             foreach (var user in users)
             {
-                await achievementService.GrantAchivement(project.BastiliaProjectId, user.JoinrpgUserId, AddModel.TemplateId, currentUserId, null);
+                await achievementService.GrantAchivement(project.BastiliaProjectId, user.JoinrpgUserId, new TemplateId(AddModel.TemplateId), currentUserId, null);
             }
             addedSuccess = true;
         }

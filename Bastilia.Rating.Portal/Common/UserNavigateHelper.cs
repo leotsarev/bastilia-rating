@@ -1,5 +1,6 @@
 ﻿using Bastilia.Rating.Domain;
 using Bastilia.Rating.Domain.DomainServices;
+using JoinRpg.Common.PrimitiveTypes;
 using Microsoft.AspNetCore.Components;
 
 namespace Bastilia.Rating.Portal.Common
@@ -10,7 +11,7 @@ namespace Bastilia.Rating.Portal.Common
         {
             BastiliaMember? user;
 
-            if (int.TryParse(userIdOrSlug, out var userId))
+            if (UserIdentification.TryParse(userIdOrSlug, null, out var userId))
             {
                 user = await bastiliaMemberRepository.GetByIdAsync(userId);
                 if (user is null)

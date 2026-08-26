@@ -80,7 +80,7 @@ internal abstract class BastiliaRepositoryBase
                         x.AchievementImageUrl is null || x.AchievementImageUrl == "https://bastilia.ru/images/logo-low.jpg", x.AchievementRatingValue, x.YearlyAchievement, x.AchievementTemplateId);
     }
 
-    private record class ProjectLink(int BastiliaProjectId, string ProjectName, string? Slug) : IBastiliaProjectLink;
+    private record class ProjectLink(BastiliaProjectId BastiliaProjectId, string ProjectName, string? Slug) : IBastiliaProjectLink;
 
-    private record class UserLink(int JoinrpgUserId, string? Slug, string UserName) : IUserLink;
+    private record class UserLink(UserIdentification JoinrpgUserId, string? Slug, string UserName) : IUserLink;
 }

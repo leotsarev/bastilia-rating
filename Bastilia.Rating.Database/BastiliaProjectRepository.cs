@@ -2,7 +2,7 @@ namespace Bastilia.Rating.Database;
 
 internal class BastiliaProjectRepository(IDbContextFactory<AppDbContext> contextFactory) : BastiliaRepositoryBase, IBastiliaProjectRepository
 {
-    public Task<BastiliaProjectWithDetails?> GetByIdAsync(int projectId) => GetOneProjectByPredicate(p => p.BastiliaProjectId == projectId);
+    public Task<BastiliaProjectWithDetails?> GetByIdAsync(BastiliaProjectId projectId) => GetOneProjectByPredicate(p => p.BastiliaProjectId == projectId);
 
     public Task<BastiliaProjectWithDetails?> GetBySlugAsync(string slug) => GetOneProjectByPredicate(p => p.Slug == slug);
 
@@ -11,7 +11,7 @@ internal class BastiliaProjectRepository(IDbContextFactory<AppDbContext> context
 
     public Task<IReadOnlyCollection<BastiliaProject>> GetAllProjects() => GetProjectsByPredicate(p => true);
 
-    public async Task<IReadOnlyCollection<int>> GetProjectIdsForCoordinator(int joinrpgUserId)
+    public async Task<IReadOnlyCollection<BastiliaProjectId>> GetProjectIdsForCoordinator(UserIdentification joinrpgUserId)
     {
         await using var context = await contextFactory.CreateDbContextAsync();
         return [.. await context.ProjectAdmins

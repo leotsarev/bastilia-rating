@@ -24,6 +24,9 @@
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
     <PackageVersion Include="JoinRpg.Common.KogdaIgraClient" Version="2026.7.14" />
+    <PackageVersion Include="JoinRpg.Common.PrimitiveTypes" Version="2026.7.34" />
+    <PackageVersion Include="JoinRpg.Common.PrimitiveTypes.SourceGenerator" Version="2026.7.34" />
+    <PackageVersion Include="JoinRpg.Common.EntityFrameworkCore" Version="2026.7.34" />
     <PackageVersion Include="OpenIddict.Client.AspNetCore" Version="7.6.0" />
     <PackageVersion Include="OpenIddict.Client.SystemNetHttp" Version="7.6.0" />
     <PackageVersion Include="OpenIddict.EntityFrameworkCore" Version="7.6.0" />

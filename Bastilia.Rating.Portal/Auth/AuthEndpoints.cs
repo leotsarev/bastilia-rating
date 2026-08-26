@@ -1,6 +1,6 @@
 using Bastilia.Rating.Domain;
-using Bastilia.Rating.Domain.Common;
 using Bastilia.Rating.Domain.DomainServices;
+using JoinRpg.Common.PrimitiveTypes;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using OpenIddict.Client.AspNetCore;
@@ -57,7 +57,7 @@ internal static class AuthEndpoints
 
             var claims = new List<Claim>
             {
-                new(ClaimTypes.NameIdentifier, member.JoinrpgUserId.ToString()),
+                new(ClaimTypes.NameIdentifier, member.JoinrpgUserId.Value.ToString()),
                 new(ClaimTypes.Name, member.UserName),
                 new("avatar", member.AvatarUrl)
             };

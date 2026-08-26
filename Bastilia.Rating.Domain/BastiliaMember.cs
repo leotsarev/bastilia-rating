@@ -1,9 +1,8 @@
-
 namespace Bastilia.Rating.Domain;
 
 // Domain Models
 public record BastiliaMember(
-    int JoinrpgUserId,
+    UserIdentification JoinrpgUserId,
     string UserName,
     string AvatarUrl,
     string? Slug,

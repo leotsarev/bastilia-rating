@@ -5,6 +5,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="JoinRpg.Common.WebInfrastructure" />
+		<PackageReference Include="JoinRpg.Common.EntityFrameworkCore" />
 		<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="OpenIddict.EntityFrameworkCore" />
 	</ItemGroup>

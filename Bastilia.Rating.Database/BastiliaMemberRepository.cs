@@ -4,7 +4,7 @@ namespace Bastilia.Rating.Database;
 
 internal class BastiliaMemberRepository(IDbContextFactory<AppDbContext> contextFactory) : BastiliaRepositoryBase, IBastiliaMemberRepository
 {
-    public async Task<BastiliaMember?> GetByIdAsync(int userId) => (await GetMemberImpl(u => u.JoinRpgUserId == userId)).FirstOrDefault();
+    public async Task<BastiliaMember?> GetByIdAsync(UserIdentification userId) => (await GetMemberImpl(u => u.JoinRpgUserId == userId)).FirstOrDefault();
 
     public async Task<BastiliaMember?> GetBySlugAsync(string slug) => (await GetMemberImpl(u => u.Slug == slug)).FirstOrDefault();
 

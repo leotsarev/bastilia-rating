@@ -8,11 +8,11 @@ public class ClubEvent
     public int Length { get; set; } = 1;
 
     // Для BirthdayParty
-    public int? JoinRpgUserId { get; set; }
+    public UserIdentification? JoinRpgUserId { get; set; }
     public User? User { get; set; }
 
     // Для ProjectGathering
-    public int? ProjectId { get; set; }
+    public BastiliaProjectId? ProjectId { get; set; }
     public BastiliaProject? Project { get; set; }
 
     // Для BastilleDinner, PartyEvent и ProjectGathering

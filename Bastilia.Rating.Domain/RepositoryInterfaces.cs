@@ -2,7 +2,7 @@ namespace Bastilia.Rating.Domain;
 
 public interface IBastiliaMemberRepository
 {
-    Task<BastiliaMember?> GetByIdAsync(int userId);
+    Task<BastiliaMember?> GetByIdAsync(UserIdentification userId);
     Task<BastiliaMember?> GetBySlugAsync(string slug);
 
     Task<IReadOnlyCollection<BastiliaMember>> GetAllAsync();
@@ -15,12 +15,12 @@ public interface IBastiliaMemberRepository
 
 public interface IBastiliaProjectRepository
 {
-    Task<BastiliaProjectWithDetails?> GetByIdAsync(int projectId);
+    Task<BastiliaProjectWithDetails?> GetByIdAsync(BastiliaProjectId projectId);
     Task<BastiliaProjectWithDetails?> GetBySlugAsync(string slug);
     Task<IReadOnlyCollection<BastiliaProject>> GetActiveProjects();
     Task<IReadOnlyCollection<BastiliaProject>> GetAllProjects();
     Task<IReadOnlyCollection<BastiliaCalendarItem>> GetProjectCalendarFor(int year);
-    Task<IReadOnlyCollection<int>> GetProjectIdsForCoordinator(int joinrpgUserId);
+    Task<IReadOnlyCollection<BastiliaProjectId>> GetProjectIdsForCoordinator(UserIdentification joinrpgUserId);
 }
 
 public interface IBastiliaTemplateRepository
