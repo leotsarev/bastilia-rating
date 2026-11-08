@@ -7,6 +7,7 @@
 @rendermode InteractiveServer
 @inject ProjectNavigateHelper projectNavigateHelper
 @inject IAchievementService achievementService
+@inject IAchievementGrantedNotifier achievementNotifier
 @inject UserLoaderHelper userLoaderHelper
 
 <PageTitle>Админка проекта @project?.ProjectName</PageTitle>
@@ -131,6 +132,8 @@
             foreach (var user in users)
             {
                 await achievementService.GrantAchivement(project.BastiliaProjectId, user.JoinrpgUserId, AddModel.TemplateId, currentUserId, null);
+                var template = project.Templates.Single(t => t.TemplateId == AddModel.TemplateId);
+                await achievementNotifier.NotifyAchievementGrantedAsync(user, template, project.ProjectName, project.Slug ?? project.BastiliaProjectId.ToString());
             }
             addedSuccess = true;
         }
