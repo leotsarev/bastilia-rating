@@ -1,4 +1,3 @@
-using Bastilia.Rating.Domain;
 using Bastilia.Rating.Portal.Common.Telegram;
 using VerifyXunit;
 using AchievementTemplate = Bastilia.Rating.Domain.AchievementTemplate;

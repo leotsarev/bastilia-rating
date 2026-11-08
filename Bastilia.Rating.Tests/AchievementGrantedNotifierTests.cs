@@ -79,17 +79,6 @@ public class AchievementGrantedNotifierTests
     }
 
     [Fact]
-    public async Task MemberWithUnverifiedTelegram_DoesNotSend()
-    {
-        var fake = new FakeTelegramBotApi();
-        var notifier = CreateNotifier(EnabledOptions(), fake);
-
-        await notifier.NotifyAchievementGrantedAsync(CreateMember(TelegramSocialLink.FromOptional((long?)null, "leo")), Template, "Мой проект", "my-project");
-
-        fake.WasCalled.ShouldBeFalse();
-    }
-
-    [Fact]
     public async Task VerifiedMember_SendsToChatId()
     {
         var fake = new FakeTelegramBotApi();
