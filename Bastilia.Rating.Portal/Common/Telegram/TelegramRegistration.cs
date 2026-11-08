@@ -12,6 +12,8 @@ public static class TelegramRegistration
         services.AddTransient<ITelegramNewsSender, TelegramNewsSender>();
         services.AddTransient<NewsMessageBuilder>();
         services.AddTransient<NewsHtmlRenderer>();
+        services.AddTransient<IAchievementGrantedNotifier, AchievementGrantedNotifier>();
+        services.AddTransient<AchievementMessageBuilder>();
 
         // Telegram — опциональная интеграция, поэтому без тега "ready": выключенный
         // Telegram не должен задерживать /health/ready.
