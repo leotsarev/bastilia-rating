@@ -24,7 +24,7 @@ public class NewsMessageSnapshotTests : VerifyBase
     {
         var news = new ProjectNews(1, 2, 3, "Имя Автора", CreatedAt, Markdown, NewsSendStatus.NotSent, null);
 
-        var message = NewsMessageBuilder.BuildMessage(news, "Мой проект", "my-project", "rating.bastilia.ru");
+        var message = TelegramTestFactory.CreateMessageBuilder().BuildMessage(news, "Мой проект", "my-project", "rating.bastilia.ru");
 
         return Verify(message);
     }
@@ -32,7 +32,7 @@ public class NewsMessageSnapshotTests : VerifyBase
     [Fact]
     public Task RenderMarkdownToTelegramHtml_ProducesStableOutput()
     {
-        var html = NewsHtmlRenderer.RenderMarkdownToTelegramHtml(Markdown);
+        var html = TelegramTestFactory.CreateHtmlRenderer().RenderMarkdownToTelegramHtml(Markdown);
 
         return Verify(html);
     }

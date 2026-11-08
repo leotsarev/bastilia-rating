@@ -8,7 +8,8 @@ namespace Bastilia.Rating.Portal.Common.Telegram;
 internal class TelegramNewsSender(
     IOptions<TelegramBotOptions> options,
     IOptions<JoinRpgHostNamesOptions> hostNames,
-    ITelegramBotApi botApi) : ITelegramNewsSender
+    ITelegramBotApi botApi,
+    NewsMessageBuilder messageBuilder) : ITelegramNewsSender
 {
     public async Task<NewsSendResult> Send(ProjectNews news, string projectName, string? projectSlug)
     {
@@ -22,7 +23,7 @@ internal class TelegramNewsSender(
             return NewsSendResult.Skipped("ChatId не настроен");
         }
 
-        var message = NewsMessageBuilder.BuildMessage(news, projectName, projectSlug, hostNames.Value.RatingHost);
+        var message = messageBuilder.BuildMessage(news, projectName, projectSlug, hostNames.Value.RatingHost);
 
         try
         {

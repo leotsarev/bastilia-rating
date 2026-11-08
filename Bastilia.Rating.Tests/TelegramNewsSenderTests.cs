@@ -40,7 +40,8 @@ public class TelegramNewsSenderTests
                 KogdaIgraHost = "kogda-igra.ru",
                 RatingHost = "rating.bastilia.ru",
             }),
-            fake);
+            fake,
+            TelegramTestFactory.CreateMessageBuilder());
 
     private static ProjectNews CreateNews() =>
         new(1, 2, 3, "Имя Автора", DateTimeOffset.UtcNow, "**текст**", NewsSendStatus.NotSent, null);

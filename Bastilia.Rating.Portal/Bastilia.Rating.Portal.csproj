@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
 	  <PackageReference Include="JoinRpg.Common.KogdaIgraClient" />
 	<PackageReference Include="Markdig" />
-	<PackageReference Include="Vereyon.Web.HtmlSanitizer" />
+	<PackageReference Include="JoinRpg.Common.WebInfrastructure.Interfaces" />
 	<PackageReference Include="Telegram.Bot" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
 		<PrivateAssets>all</PrivateAssets>

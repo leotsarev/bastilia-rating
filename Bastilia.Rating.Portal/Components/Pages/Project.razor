@@ -9,6 +9,7 @@
 
 @inject ProjectNavigateHelper projectNavigateHelper
 @inject IProjectNewsRepository newsRepository
+@inject NewsHtmlRenderer newsHtmlRenderer
 <PageTitle>Проект @project?.ProjectName</PageTitle>
 @if (project is null)
 {
@@ -23,7 +24,7 @@
         <Header>Новости</Header>
         <Body>
             <div class="text-muted small">@lastNews.CreatedAt.ToLocalTime().ToString("g") — @lastNews.AuthorName</div>
-            <div>@((MarkupString)NewsHtmlRenderer.RenderMarkdownToTelegramHtml(lastNews.Text))</div>
+            <div>@((MarkupString)newsHtmlRenderer.RenderMarkdownToTelegramHtml(lastNews.Text))</div>
             <a href="/project/@ProjectId/news">Все новости →</a>
         </Body>
     </Card>

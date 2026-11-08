@@ -8,6 +8,7 @@
 @inject ProjectNavigateHelper projectNavigateHelper
 @inject IProjectNewsRepository newsRepository
 @inject IProjectNewsService newsService
+@inject NewsHtmlRenderer newsHtmlRenderer
 
 <PageTitle>Новости проекта @project?.ProjectName</PageTitle>
 
@@ -54,7 +55,7 @@ else
         <Card>
             <Body>
                 <div class="text-muted small">@news.CreatedAt.ToLocalTime().ToString("g") — @news.AuthorName</div>
-                <div>@((MarkupString)NewsHtmlRenderer.RenderMarkdownToTelegramHtml(news.Text))</div>
+                <div>@((MarkupString)newsHtmlRenderer.RenderMarkdownToTelegramHtml(news.Text))</div>
                 @if (news.SendStatus != NewsSendStatus.Sent && isAdmin)
                 {
                     @if (!string.IsNullOrWhiteSpace(news.TelegramError))

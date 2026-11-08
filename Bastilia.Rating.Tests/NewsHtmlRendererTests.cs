@@ -5,10 +5,12 @@ namespace Bastilia.Rating.Tests;
 
 public class NewsHtmlRendererTests
 {
+    private readonly NewsHtmlRenderer renderer = TelegramTestFactory.CreateHtmlRenderer();
+
     [Fact]
     public void BoldMarkdown_BecomesStrong()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("**жирный**");
+        var result = renderer.RenderMarkdownToTelegramHtml("**жирный**");
 
         result.ShouldContain("<strong>жирный</strong>");
     }
@@ -16,7 +18,7 @@ public class NewsHtmlRendererTests
     [Fact]
     public void LinkMarkdown_BecomesAnchorWithHref()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("[текст](https://example.com)");
+        var result = renderer.RenderMarkdownToTelegramHtml("[текст](https://example.com)");
 
         result.ShouldContain("<a href=\"https://example.com/\" target=\"_blank\" rel=\"nofollow\">текст</a>");
     }
@@ -24,7 +26,7 @@ public class NewsHtmlRendererTests
     [Fact]
     public void ScriptTag_IsStripped()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("<script>alert(1)</script>привет");
+        var result = renderer.RenderMarkdownToTelegramHtml("<script>alert(1)</script>привет");
 
         result.ShouldNotContain("<script");
         result.ShouldNotContain("</script");
@@ -34,7 +36,7 @@ public class NewsHtmlRendererTests
     [Fact]
     public void JavascriptLink_HrefIsRemoved()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("[клик](javascript:alert(1))");
+        var result = renderer.RenderMarkdownToTelegramHtml("[клик](javascript:alert(1))");
 
         result.ShouldNotContain("javascript:");
         result.ShouldContain("клик");
@@ -43,7 +45,7 @@ public class NewsHtmlRendererTests
     [Fact]
     public void MailtoLink_HrefPassesThrough()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("[почта](mailto:test@example.com)");
+        var result = renderer.RenderMarkdownToTelegramHtml("[почта](mailto:test@example.com)");
 
         result.ShouldContain("<a href=\"mailto:test@example.com\" target=\"_blank\" rel=\"nofollow\">почта</a>");
     }
@@ -51,7 +53,7 @@ public class NewsHtmlRendererTests
     [Fact]
     public void TwoParagraphs_SeparatedByNewline()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("один\n\nдва");
+        var result = renderer.RenderMarkdownToTelegramHtml("один\n\nдва");
 
         Regex.IsMatch(result, "один\n+два").ShouldBeTrue();
     }
@@ -59,7 +61,7 @@ public class NewsHtmlRendererTests
     [Fact]
     public void ListItems_SeparatedByNewline()
     {
-        var result = NewsHtmlRenderer.RenderMarkdownToTelegramHtml("- один\n- два");
+        var result = renderer.RenderMarkdownToTelegramHtml("- один\n- два");
 
         result.ShouldContain("один");
         result.ShouldContain("два");

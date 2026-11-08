@@ -10,7 +10,7 @@ public class NewsMessageBuilderTests
     [Fact]
     public void WithSlug_BuildsHeaderHashtagBodyFooter()
     {
-        var message = NewsMessageBuilder.BuildMessage(CreateNews(), "Мой проект", "my-project", "rating.bastilia.ru");
+        var message = TelegramTestFactory.CreateMessageBuilder().BuildMessage(CreateNews(), "Мой проект", "my-project", "rating.bastilia.ru");
 
         message.ShouldStartWith("<b>Мой проект</b> #my-project");
         message.ShouldContain("<strong>текст</strong>");
@@ -20,7 +20,7 @@ public class NewsMessageBuilderTests
     [Fact]
     public void WithoutSlug_UsesProjectIdInLinkAndOmitsHashtag()
     {
-        var message = NewsMessageBuilder.BuildMessage(CreateNews(), "Мой проект", null, "rating.bastilia.ru");
+        var message = TelegramTestFactory.CreateMessageBuilder().BuildMessage(CreateNews(), "Мой проект", null, "rating.bastilia.ru");
 
         message.ShouldStartWith("<b>Мой проект</b>");
         message.ShouldNotContain("#");
@@ -30,7 +30,7 @@ public class NewsMessageBuilderTests
     [Fact]
     public void ProjectNameWithHtml_IsEscaped()
     {
-        var message = NewsMessageBuilder.BuildMessage(CreateNews(), "<b>x</b>", "my-project", "rating.bastilia.ru");
+        var message = TelegramTestFactory.CreateMessageBuilder().BuildMessage(CreateNews(), "<b>x</b>", "my-project", "rating.bastilia.ru");
 
         message.ShouldContain("&lt;b&gt;x&lt;/b&gt;");
     }

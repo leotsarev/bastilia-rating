@@ -1,10 +1,10 @@
-using HtmlAgilityPack;
+using JoinRpg.Common.WebInfrastructure.HtmlSanitize;
 using Markdig;
-using Vereyon.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bastilia.Rating.Portal.Common.Telegram;
 
-public static class NewsHtmlRenderer
+public class NewsHtmlRenderer(IServiceProvider serviceProvider)
 {
     private static readonly MarkdownPipeline MarkdownPipeline = new MarkdownPipelineBuilder()
         .UseAdvancedExtensions()
@@ -12,19 +12,21 @@ public static class NewsHtmlRenderer
         .DisableHtml()
         .Build();
 
-    private static readonly HtmlSanitizer Sanitizer = CreateSanitizer();
-
-    public static string RenderMarkdownToTelegramHtml(string markdown)
+    public string RenderMarkdownToTelegramHtml(string markdown)
     {
         var html = Markdown.ToHtml(markdown, MarkdownPipeline);
 
-        return Sanitizer.Sanitize(ToTelegramHtmlString(html));
+        // IJoinTelegramHtmlSanitizer — одноразовый: Dispose возвращает экземпляр в пул,
+        // поэтому берём новый из DI на каждый рендер.
+        using var sanitizer = serviceProvider.GetRequiredService<IJoinTelegramHtmlSanitizer>();
+        return sanitizer.Sanitize(ToTelegramHtmlString(html));
     }
 
     /// <summary>
     /// Эквивалент ToTelegramHtmlString из JoinRpg.Markdown (MarkDownRendererFacade):
-    /// Telegram не понимает блочные теги, а наш санитайзер выбрасывает их содержимое-теги
-    /// (p, ul, ol, li), поэтому переносы строк вставляем заранее, пока закрывающие теги ещё на месте.
+    /// Telegram не понимает блочные теги, а telegram-санитайзер (IJoinTelegramHtmlSanitizer)
+    /// выбрасывает их содержимое-теги (p, ul, ol, li), поэтому переносы строк вставляем заранее,
+    /// пока закрывающие теги ещё на месте.
     /// </summary>
     /// <remarks>
     /// Отличия от joinrpg: там заменяется только <c>&lt;/p&gt;</c> (плюс TrimEnd) и финальная
@@ -41,25 +43,4 @@ public static class NewsHtmlRenderer
             .Replace("<ol>", string.Empty)
             .Replace("</ol>", string.Empty)
             .Trim();
-
-    private static HtmlSanitizer CreateSanitizer()
-    {
-        var sanitizer = new HtmlSanitizer
-        {
-            WhiteListMode = true,
-        };
-
-        sanitizer.Tags("b", "strong", "i", "em", "u", "ins", "s", "strike", "del").RemoveEmpty();
-
-        sanitizer.Tag("a").SetAttribute("target", "_blank").SetAttribute("rel", "nofollow")
-            .CheckAttributeUrl("href")
-            .RemoveEmpty()
-            .NoAttributes(SanitizerOperation.FlattenTag);
-
-        sanitizer.Tags("code", "pre", "blockquote").RemoveEmpty();
-
-        sanitizer.Tags("p", "div", "span", "ul", "ol", "li").Flatten();
-
-        return sanitizer;
-    }
 }

@@ -10,6 +10,8 @@ public static class TelegramRegistration
         services.AddOptions<TelegramBotOptions>().BindConfiguration("Telegram");
         services.AddSingleton<ITelegramBotApi, TelegramBotApi>();
         services.AddTransient<ITelegramNewsSender, TelegramNewsSender>();
+        services.AddTransient<NewsMessageBuilder>();
+        services.AddTransient<NewsHtmlRenderer>();
 
         // Telegram — опциональная интеграция, поэтому без тега "ready": выключенный
         // Telegram не должен задерживать /health/ready.
