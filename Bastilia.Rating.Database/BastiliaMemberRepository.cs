@@ -40,7 +40,7 @@ internal class BastiliaMemberRepository(IDbContextFactory<AppDbContext> contextF
             new UserIdentification(u.JoinRpgUserId),
             u.Slug,
             u.Username,
-            TelegramSocialLink.FromOptional(u.TelegramChatId, PrefferedName.FromOptional(u.TelegramUsername))))];
+            TelegramSocialLink.FromOptional(u.TelegramChatId, PrefferedName.FromOptional(u.TelegramUsername), isVerified: true)))];
     }
 
     public async Task<IReadOnlyCollection<MemberHistoryItem>> GetMembersHistory()
@@ -159,6 +159,6 @@ internal class BastiliaMemberRepository(IDbContextFactory<AppDbContext> contextF
                 .ToList()
                 .AsReadOnly(),
             BirthDay: user.BirthDay,
-            Telegram: TelegramSocialLink.FromOptional(user.TelegramChatId, PrefferedName.FromOptional(user.TelegramUsername)));
+            Telegram: TelegramSocialLink.FromOptional(user.TelegramChatId, PrefferedName.FromOptional(user.TelegramUsername), isVerified: true));
     }
 }

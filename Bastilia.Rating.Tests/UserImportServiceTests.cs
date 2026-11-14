@@ -19,7 +19,7 @@ public class UserImportServiceTests
         new(1, userName, avatarUrl, "slug", true, [], [], [], null, telegram);
 
     private static TelegramSocialLink TelegramLink(long chatId = ExistingChatId, string? username = ExistingUsername)
-        => TelegramSocialLink.FromOptional(chatId, username)!;
+        => TelegramSocialLink.FromOptional(chatId, username, isVerified: true)!;
 
     [Fact]
     public async Task ExistingUser_NickChanged_UpdatesNickOnly()

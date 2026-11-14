@@ -25,7 +25,8 @@ internal static class ClaimsPrincipalTelegramExtensions
             }
         }
 
-        var telegram = TelegramSocialLink.FromOptional(telegramChatId, PrefferedName.FromOptional(telegramUsername));
+        // Chat id приходит только из верифицированной привязки Telegram (ExternalLogin на id.joinrpg.ru).
+        var telegram = TelegramSocialLink.FromOptional(telegramChatId, PrefferedName.FromOptional(telegramUsername), isVerified: true);
         if (telegram is null && telegramUsername is not null)
         {
             logger.LogDebug("Claim telegram есть ('{TelegramUsername}'), но telegram_chat_id отсутствует — привязка Telegram не обновляется",

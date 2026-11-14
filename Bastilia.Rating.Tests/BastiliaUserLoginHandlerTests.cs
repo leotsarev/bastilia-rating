@@ -16,7 +16,7 @@ public class BastiliaUserLoginHandlerTests
         new(42, userName, avatarUrl, "slug", false, [], [], [], null, telegram);
 
     private static TelegramSocialLink TelegramLink(long chatId = ExistingChatId, string? username = ExistingTelegramUsername)
-        => TelegramSocialLink.FromOptional(chatId, username)!;
+        => TelegramSocialLink.FromOptional(chatId, username, isVerified: true)!;
 
     [Fact]
     public async Task NoUserInfoClaims_UsesLegacyXApiPath()

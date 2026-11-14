@@ -16,6 +16,7 @@ public class ClaimsPrincipalTelegramExtensionsTests
         telegram.ShouldNotBeNull();
         telegram.Id.ShouldBe(987654321L);
         telegram.PrettyName?.Value.ShouldBe("some_user");
+        telegram.IsVerified.ShouldBeTrue();
     }
 
     [Fact]
@@ -28,6 +29,7 @@ public class ClaimsPrincipalTelegramExtensionsTests
         telegram.ShouldNotBeNull();
         telegram.Id.ShouldBe(987654321L);
         telegram.PrettyName.ShouldBeNull();
+        telegram.IsVerified.ShouldBeTrue();
     }
 
     [Fact]
